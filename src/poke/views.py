@@ -14,6 +14,7 @@ def pokemon(requests, number):
     result = r.json()
     
     weight = result['weight']
+    type = result['types'][0]['type']['name']
     image = result['sprites']['other']['home']['front_default']
 
     rinfo = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(number))
@@ -24,5 +25,5 @@ def pokemon(requests, number):
     color = result['color']['name']
     habitat = result['habitat']['name']
 
-    context = {'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'image' : image }        
+    context = {'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }        
     return render(requests,'pokeapp/pokemon.html',context)
