@@ -8,6 +8,12 @@ def home(requests):
     context = {'name' : 'TITI', 'listPoke': ['Pikachu', 'Dracafau', 'Salamèche']}
     return render(requests, 'pokeapp/home.html', context)
 
+def team(requests):
+    return render(requests, 'pokeapp/team.html')
+
+def about(requests):
+    return render(requests, 'pokeapp/about.html')
+
 def search(requests, searchText):
     number = 0
     rserch= req.get("https://pokeapi.co/api/v2/pokemon/"+searchText)
