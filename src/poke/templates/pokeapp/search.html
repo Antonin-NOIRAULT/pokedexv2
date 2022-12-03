@@ -9,6 +9,16 @@
     <title>Poke App</title>
 </head>
 <body>
+    <div id="navbarre">
+        <ul id="navbarre">
+            <li id="navbarre"><a href="/pokedex">Home</a></li>
+            <li id="navbarre"><a href="/pokedex/pokemon/1/">Pokedex</a></li>
+            <li id="navbarre" class="active"><a href="/pokedex/search/bulbasaur/">Search</a></li>
+            <li id="navbarre"><a href="pokedex/team">Team</a></li>
+            <li id="navbarre"><a href="about.asp">About</a></li>
+        </ul>
+    </div>
+    
     <div id="pokedex">
         <div id="left">
           <div id="logo"></div>
@@ -67,7 +77,8 @@
         </div>
         <div id="right">
           <div id="stats">
-            <strong>Name:</strong>{{ name }}<br/>
+            <center><strong>{{ name }}</strong></center><br/>
+            <strong>Type:</strong> {{ type }}<br/>
             <strong>Color:</strong> {{ color }}<br/>
             <strong>Habitat:</strong> {{ habitat }}<br/>
             <strong>Weight:</strong> {{ weight }}<br/><br/>

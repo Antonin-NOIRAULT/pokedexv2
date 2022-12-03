@@ -9,7 +9,7 @@ def home(requests):
     return render(requests, 'pokeapp/home.html', context)
 
 def search(requests, searchText):
-    number = 2
+    number = 0
     rserch= req.get("https://pokeapi.co/api/v2/pokemon/"+searchText)
     result = rserch.json()
     number=result['id']
@@ -28,7 +28,7 @@ def search(requests, searchText):
     habitat = result['habitat']['name']
 
     context = {'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'image' : image }  
-    return render(requests,'pokeapp/pokemon.html',context)
+    return render(requests,'pokeapp/search.html',context)
 
 
 def pokemon(requests, number):
