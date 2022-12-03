@@ -19,12 +19,11 @@ def search(requests, searchText):
     
     weight = result['weight']
     image = result['sprites']['other']['home']['front_default']
+    name = result['name']
 
     rinfo = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(number))
     result = rinfo.json()
-    for langue in result['names']:
-        if langue['language']['name']=="fr":
-            name = langue['name']
+        
     color = result['color']['name']
     habitat = result['habitat']['name']
 
@@ -38,12 +37,10 @@ def pokemon(requests, number):
     
     weight = result['weight']
     image = result['sprites']['other']['home']['front_default']
+    name = result['name']   
 
     rinfo = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(number))
     result = rinfo.json()
-    for langue in result['names']:
-        if langue['language']['name']=="fr":
-            name = langue['name']
     color = result['color']['name']
     habitat = result['habitat']['name']
 
