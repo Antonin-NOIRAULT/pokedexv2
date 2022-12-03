@@ -10,14 +10,16 @@ def home(requests):
 
 
 def pokemon(requests, number):
-    rname = req.get("https://pokeapi.co/api/v2/pokemon/"+str(number))
-    result = rname.json()
-    name = result['name']
-    image = result['sprites']['front_default']
+    r = req.get("https://pokeapi.co/api/v2/pokemon/"+str(number))
+    result = r.json()
+    
+    image = result['sprites']['other']['home']['front_default']
 
-    rcolor = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(number))
-    result = rcolor.json()
-
+    rinfo = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(number))
+    result = rinfo.json()
+    for langue in result['names']:
+        if langue['language']['name']=="fr":
+            name = langue['name']
     color = result['color']['name']
     habitat = result['habitat']['name']
 

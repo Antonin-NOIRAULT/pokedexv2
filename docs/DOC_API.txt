@@ -1,4 +1,13 @@
 Lien API                                :  https://pokeapi.co/
 
-Lien API qui liste tout les pokémons    :  https://pokeapi.co/api/v2/pokemon/1/ 
-    #1 étant la position du pokemon
+Lien API :  https://pokeapi.co/api/v2/pokemon/1/ 
+    # 1 étant la position du pokemon
+    # Info sur :
+        - Image 
+
+Liens API : https://pokeapi.co/api/v2/pokemon-species/1/
+    # 1 étant la position du pokemon
+    # Info sur :
+        - habitat
+        - Color
+        - Name
