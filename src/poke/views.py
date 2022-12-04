@@ -1,11 +1,27 @@
 import requests as req
 from django.shortcuts import render
 from django.http import HttpResponse
+import random
 
 # Create your views here.
 
 def home(requests):
-    context = {'name' : 'TITI', 'listPoke': ['Pikachu', 'Dracafau', 'Salamèche']}
+    liste_images = []
+    rserch= req.get("https://pokeapi.co/api/v2/pokemon/")
+    
+    status=rserch.status_code
+    if(status!=200):
+        context = {'name': status}
+        return render(requests,'pokeapp/searcherror.html')
+    else:
+        result = rserch.json()
+        r = random.randint(1, 141)    
+        for i in range(r, r + 10):
+            r = req.get("https://pokeapi.co/api/v2/pokemon/"+str(i))
+            result = r.json()
+            liste_images.append(result['sprites']['other']['home']['front_default'])
+
+    context = {'random' : random.randint(1, 151), 'liste_images' : liste_images[1:-1], 'first' : liste_images[0]}
     return render(requests, 'pokeapp/home.html', context)
 
 def team(requests):
