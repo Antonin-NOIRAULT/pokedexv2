@@ -66,12 +66,14 @@
           <div id="barbutton2"></div>
           <div id="cross">
             <div id="leftcross">
+              <button id="beforePokemonButton" type="button" onclick="beforePokemon();"></button>  
               <div id="leftT"></div>
             </div>
             <div id="topcross">
               <div id="upT"></div>
             </div>
             <div id="rightcross">
+              <button id="nextPokemonButton" type="button" onclick="nextPokemon();"></button>
               <div id="rightT"></div>
             </div>
             <div id="midcross">
@@ -121,6 +123,15 @@
         function getSearch() {
           var input = document.getElementById("searchtext").value;
           window.location.href="/pokedex/search/"+input
+        }
+        function nextPokemon() {
+          window.location.href="/pokedex/pokemon/" + "{{ nextPokemonId }}"
+        }
+        function beforePokemon() {
+            if( "{{beforePokemonId}}" >= 1 ){
+                window.location.href="/pokedex/pokemon/" + "{{ beforePokemonId }}"
+            }
+          
         }
       </script>
 </body>
