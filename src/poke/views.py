@@ -23,6 +23,7 @@ def search(requests, searchText):
     r = req.get("https://pokeapi.co/api/v2/pokemon/"+str(number))
     result = r.json()
     
+    type = result['types'][0]['type']['name']
     weight = result['weight']
     image = result['sprites']['other']['home']['front_default']
     name = result['name']
@@ -33,7 +34,7 @@ def search(requests, searchText):
     color = result['color']['name']
     habitat = result['habitat']['name']
 
-    context = {'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'image' : image }  
+    context = {'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }  
     return render(requests,'pokeapp/search.html',context)
 
 

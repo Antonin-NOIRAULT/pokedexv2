@@ -18,6 +18,12 @@
             <li id="navbarre"><a href="/pokedex/about">About</a></li>
         </ul>
     </div>
+    <div id="search">
+        <br>
+        <center><p>Which pokemon are you looking for ?</p><br></center>
+        <center><input type="text" id="searchtext" name="searchtext" value="bulbasaur">
+        <button id="searchButton" type="button" onclick="getSearch();"> Submit </button></center>
+    </div>
     
     <div id="pokedex">
         <div id="left">
@@ -109,5 +115,12 @@
           <div id="curve2_right"></div>
         </div>
       </div>
+
+      <script>
+        function getSearch() {
+          var input = document.getElementById("searchtext").value;
+          window.location.href="/pokedex/search/"+input
+        }
+      </script>
 </body>
 </html>
