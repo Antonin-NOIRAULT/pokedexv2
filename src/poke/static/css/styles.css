@@ -12,6 +12,26 @@ ul#navbarre
     background-color: #333;
 }
 
+button#nextPokemonButton
+	{
+		background-color: transparent; 
+		position: absolute; 
+		z-index:10; 
+		border: none; 
+		width:35px; 
+		height:35px;
+	}
+
+button#beforePokemonButton
+	{
+		background-color: transparent; 
+		position: absolute; 
+		z-index:10; 
+		border: none; 
+		width:35px; 
+		height:35px;
+	}
+
 li#navbarre
 {
     float: left;

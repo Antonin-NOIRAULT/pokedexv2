@@ -59,12 +59,14 @@
           <div id="barbutton2"></div>
           <div id="cross">
             <div id="leftcross">
+              <button id="beforePokemonButton" type="button" onclick="beforePokemon();"></button>  
               <div id="leftT"></div>
             </div>
             <div id="topcross">
               <div id="upT"></div>
             </div>
             <div id="rightcross">
+              <button id="nextPokemonButton" type="button" onclick="nextPokemon();"></button>
               <div id="rightT"></div>
             </div>
             <div id="midcross">
@@ -109,5 +111,19 @@
           <div id="curve2_right"></div>
         </div>
       </div>
+
+      <script>
+        function nextPokemon() {
+          window.location.href="/pokedex/pokemon/" + "{{ nextPokemonId }}"
+        }
+      </script>
+      <script>
+        function beforePokemon() {
+            if( "{{beforePokemonId}}" >= 1 ){
+                window.location.href="/pokedex/pokemon/" + "{{ beforePokemonId }}"
+            }
+          
+        }
+      </script>
 </body>
 </html>
