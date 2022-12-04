@@ -54,8 +54,10 @@ def search(requests, searchText):
             
         color = result['color']['name']
         habitat = result['habitat']['name']
+        nextPokemonId =number+1
+        beforePokemonId =number-1
 
-        context = {'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }  
+        context = {'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId ,'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }  
         return render(requests,'pokeapp/search.html',context)
 
 
