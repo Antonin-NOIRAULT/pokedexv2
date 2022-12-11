@@ -25,6 +25,151 @@
         <center><h3>Here is your team</h3><br></center>
         <center><button id="deletButton" type="button" onclick="getdelete();" style="background-color: #363636; border: none;color: white; padding: 5px 10px;font-size: 16px;"> Delete Team </button></center>
     </div>
+    <div id="pokedex">
+        <div id="left">
+          <div id="logo"></div>
+          <div id="bg_curve1_left"></div>
+          <div id="bg_curve2_left"></div>
+          <div id="curve1_left">
+            <div id="buttonGlass">
+              <div id="reflect"> </div>
+            </div>
+            <div id="miniButtonGlass1"></div>
+            <div id="miniButtonGlass2"></div>
+            <div id="miniButtonGlass3"></div>
+          </div>
+          <div id="curve2_left">
+            <div id="junction">
+              <div id="junction1"></div>
+              <div id="junction2"></div>
+            </div>
+          </div>
+          <div id="screen">
+            <div id="topPicture">
+              <div id="buttontopPicture1"></div>
+              <div id="buttontopPicture2"></div>
+            </div>
+            <div id="picture">
+              <img src="{{ image }}" alt="psykokwak" height="170" />
+            </div>
+            <div id="buttonbottomPicture"></div>
+            <div id="speakers">
+              <div class="sp"></div>
+              <div class="sp"></div>
+              <div class="sp"></div>
+              <div class="sp"></div>
+            </div>
+          </div>
+          <div id="bigbluebutton"></div>
+          <div id="barbutton1"></div>
+          <div id="barbutton2"></div>
+          <div id="cross">
+            <div id="leftcross">
+              <button id="beforePokemonButton" type="button" onclick="beforePokemon();"></button>  
+              <div id="leftT"></div>
+            </div>
+            <div id="topcross">
+              <div id="upT"></div>
+            </div>
+            <div id="rightcross">
+              <button id="nextPokemonButton" type="button" onclick="nextPokemon();"></button>
+              <div id="rightT"></div>
+            </div>
+            <div id="midcross">
+              <div id="midCircle"></div>
+            </div>
+            <div id="botcross">
+              <div id="downT"></div>
+            </div>
+          </div>
+        </div>
+        <div id="right">
+          <div id="stats">
+            <center><strong>{{ name }}</strong></center><br/>
+            <strong>Type:</strong> {{ type }}<br/>
+            <strong>Color:</strong> {{ color }}<br/>
+            <strong>Habitat:</strong> {{ habitat }}<br/>
+            <strong>Weight:</strong> {{ weight }}<br/><br/>
+          </div>
+          <div id="blueButtons1">
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+          </div>
+          <div id="blueButtons2">
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+            <div class="blueButton"></div>
+          </div>
+          <div id="miniButtonGlass4"></div>
+          <div id="miniButtonGlass5"></div>
+          <div id="barbutton3"></div>
+          <div id="barbutton4"></div>
+          <div id="yellowBox1">
+            {% if inteam is False %}
+              {% if addteam %}
+                <button id="teamButton" type="button" onclick="addTeam();">Add Team</button>
+              {% else %}
+                <button id="teamButton" type="button"><strong>Team Full !</strong></button>
+              {% endif %}
+            {% endif %}
+            {% if inteam %}
+              <button id="teamButton" type="button"><strong>In Team !</strong></button>
+            {% endif %}
+          </div>
+          <div id="yellowBox2">
+            {% if inteam %}
+              <button id="teamButton" type="button" onclick="delTeam();">Del Team</button>
+            {% endif %}
+          </div>
+          <div id="bg_curve1_right"></div>
+          <div id="bg_curve2_right"></div>
+          <div id="curve1_right"></div>
+          <div id="curve2_right"></div>
+        </div>
+      </div>
+
+      <script>
+        function addTeam() {
+          window.location.href="/pokedex/team/" + "{{ PokemonId }}" +"/add"
+        }
+      </script>
+      <script>
+        function delTeam() {
+          window.location.href="/pokedex/team/" + "{{ PokemonId }}" +"/del"
+        }
+      </script>
+      <script>
+        function nextPokemon() {
+            if( "{{nextPokemonId}}" <=5  ){
+                window.location.href="/pokedex/team/" + "{{ nextPokemonId }}"
+            }
+        }
+      </script>
+      <script>
+        function beforePokemon() {
+            if( "{{beforePokemonId}}" >= 1 ){
+                window.location.href="/pokedex/team/" + "{{ beforePokemonId }}"
+            }
+          
+        }
+      </script>
+      <style>
+        button#teamButton
+        {
+          background-color: transparent; 
+          position: absolute; 
+          z-index:10; 
+          border: none; 
+          width:140px; 
+          height:70px;
+        }
+      </style>
+
     <script>
         function getdelete() {
             window.location.href="/pokedex/team/delall"

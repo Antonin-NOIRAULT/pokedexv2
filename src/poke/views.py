@@ -25,32 +25,39 @@ def home(requests):
     return render(requests, 'pokeapp/home.html', context)
 
 def team(requests,number):
-    r = req.get("https://pokeapi.co/api/v2/pokemon/"+str(number))
-    result = r.json()
-    
-    nextPokemonId=result['id'] + 1
-    beforePokemonId=result['id'] - 1
-    type = result['types'][0]['type']['name']
-    weight = result['weight']
-    image = result['sprites']['other']['home']['front_default']
-    name = result['name']   
-
-    rinfo = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(number))
-    result = rinfo.json()
-    color = result['color']['name']
-    habitat = result['habitat']['name']
-
-    if(Team.objects.count()<5):
-        addteam = True
+    if(Team.objects.count()==0):
+        return render(requests,'pokeapp/teamerror.html')
     else:
-        addteam = False
-    if(Team.objects.filter(id = number).exists()):
-        inteam = True
-    else:
-        inteam = False
+        pok = Team.objects.all()[number-1]
+        idpokemon = pok.id
+        r = req.get("https://pokeapi.co/api/v2/pokemon/"+str(idpokemon))
+        result = r.json()
+        if(Team.objects.count()==number):
+            nextPokemonId=number
+        else:
+            nextPokemonId=number + 1
+        beforePokemonId=number - 1
+        type = result['types'][0]['type']['name']
+        weight = result['weight']
+        image = result['sprites']['other']['home']['front_default']
+        name = result['name']   
 
-    context = {'inteam' : inteam ,'addteam' : addteam ,'PokemonId': number, 'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId , 'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image } 
-    return render(requests, 'pokeapp/team.html',context)
+        rinfo = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(idpokemon))
+        result = rinfo.json()
+        color = result['color']['name']
+        habitat = result['habitat']['name']
+
+        if(Team.objects.count()<5):
+            addteam = True
+        else:
+            addteam = False
+        if(Team.objects.filter(id = idpokemon).exists()):
+            inteam = True
+        else:
+            inteam = False
+
+        context = {'inteam' : inteam ,'addteam' : addteam ,'PokemonId': idpokemon, 'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId , 'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image } 
+        return render(requests, 'pokeapp/team.html',context)
 
 def teamadd(requests,number):
     Team.objects.create(id=number)
