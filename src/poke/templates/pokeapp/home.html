@@ -22,7 +22,7 @@
     </ul>
   </div>
   <center> <h1>Welcome to our Pokedex!</h1></center>
-  <audio hidden="hidden" controls autoplay>
+  <audio hidden="hidden" id="myaudio" controls autoplay>
     <source src="{% static 'audio/Pokemon.mp3' %}" type="audio/mp3">
   </audio>
     <div id="search">
@@ -64,6 +64,10 @@
       var input = document.getElementById("searchtext").value;
       window.location.href="/pokedex/search/"+input
     }
+  </script>
+  <script>
+    var audio = document.getElementById("myaudio");
+    audio.volume = 0.05;
   </script>
 
 </body>
