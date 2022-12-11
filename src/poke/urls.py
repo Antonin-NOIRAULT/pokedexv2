@@ -7,4 +7,5 @@ urlpatterns = [
     path('search/<str:searchText>/',views.search,name="search"),
     path('about/',views.about,name="about"),
     path('team',views.team,name="team"),
+    path('team/<int:number>/add',views.teamadd,name="teamadd"),
 ]

@@ -5,6 +5,8 @@ import random
 
 # Create your views here.
 
+team = []
+
 def home(requests):
     liste_images = []
     rserch= req.get("https://pokeapi.co/api/v2/pokemon/")
@@ -26,6 +28,12 @@ def home(requests):
 
 def team(requests):
     return render(requests, 'pokeapp/team.html')
+
+def teamadd(requests,number):
+
+    context = {'PokemonId': number }        
+    return render(requests,'pokeapp/addteam.html',context)
+
 
 def about(requests):
     return render(requests, 'pokeapp/about.html')
@@ -77,5 +85,5 @@ def pokemon(requests, number):
     color = result['color']['name']
     habitat = result['habitat']['name']
 
-    context = {'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId , 'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }        
+    context = {'PokemonId': number, 'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId , 'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }        
     return render(requests,'pokeapp/pokemon.html',context)

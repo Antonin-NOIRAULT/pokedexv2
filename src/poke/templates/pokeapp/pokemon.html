@@ -105,8 +105,12 @@
           <div id="miniButtonGlass5"></div>
           <div id="barbutton3"></div>
           <div id="barbutton4"></div>
-          <div id="yellowBox1"></div>
-          <div id="yellowBox2"></div>
+          <div id="yellowBox1">
+            <button id="teamButton" type="button" onclick="addTeam();">Add Team</button>
+          </div>
+          <div id="yellowBox2">
+            <!--<button id="teamButton" type="button" onclick="delTeam();">Del Team</button>!-->
+          </div>
           <div id="bg_curve1_right"></div>
           <div id="bg_curve2_right"></div>
           <div id="curve1_right"></div>
@@ -114,6 +118,16 @@
         </div>
       </div>
 
+      <script>
+        function addTeam() {
+          window.location.href="/pokedex/team/" + "{{ PokemonId }}" +"/add"
+        }
+      </script>
+      <script>
+        function delTeam() {
+          window.location.href="/pokedex/team/" + "{{ nextPokemonId }}" +"/del"
+        }
+      </script>
       <script>
         function nextPokemon() {
           window.location.href="/pokedex/pokemon/" + "{{ nextPokemonId }}"
@@ -127,5 +141,16 @@
           
         }
       </script>
+      <style>
+        button#teamButton
+        {
+          background-color: transparent; 
+          position: absolute; 
+          z-index:10; 
+          border: none; 
+          width:140px; 
+          height:70px;
+        }
+      </style>
 </body>
 </html>
