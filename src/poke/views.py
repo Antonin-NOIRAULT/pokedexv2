@@ -28,13 +28,14 @@ def team(requests):
     return render(requests, 'pokeapp/team.html')
 
 def teamadd(requests,number):
-    if(Team.objects.count()<5):
-        Team.objects.create(id=number)
-        
-    #teampokemon = Team.objects.all()[1]
-    #idpok = teampokemon.id
+    Team.objects.create(id=number)
     context = {'PokemonId': number }        
-    return render(requests,'pokeapp/addteam.html',context)
+    return render(requests,'pokeapp/adddelteam.html',context)
+
+def teamdel(requests,number):
+    Team.objects.filter(id = number).delete()
+    context = {'PokemonId': number }        
+    return render(requests,'pokeapp/adddelteam.html',context)
 
 
 def about(requests):
@@ -91,7 +92,7 @@ def pokemon(requests, number):
         addteam = True
     else:
         addteam = False
-    if(Team.objects.filter(id = number).exists):
+    if(Team.objects.filter(id = number).exists()):
         inteam = True
     else:
         inteam = False

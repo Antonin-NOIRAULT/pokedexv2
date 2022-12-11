@@ -106,16 +106,21 @@
           <div id="barbutton3"></div>
           <div id="barbutton4"></div>
           <div id="yellowBox1">
-            {% if addteam is not False and inteam is not True %}
-            <button id="teamButton" type="button" onclick="addTeam();">Add Team</button>
-            {% elif addteam is not True %}
-            <button id="teamButton" type="button" >Team full !</button>
-            {% elif inteam is not False %}
-            <button id="teamButton" type="button" >In Team !</button>
+            {% if inteam is False %}
+              {% if addteam %}
+                <button id="teamButton" type="button" onclick="addTeam();">Add Team</button>
+              {% else %}
+                <button id="teamButton" type="button"><strong>Team Full !</strong></button>
+              {% endif %}
+            {% endif %}
+            {% if inteam %}
+              <button id="teamButton" type="button"><strong>In Team !</strong></button>
             {% endif %}
           </div>
           <div id="yellowBox2">
-            <!--<button id="teamButton" type="button" onclick="delTeam();">Del Team</button>!-->
+            {% if inteam %}
+              <button id="teamButton" type="button" onclick="delTeam();">Del Team</button>
+            {% endif %}
           </div>
           <div id="bg_curve1_right"></div>
           <div id="bg_curve2_right"></div>
@@ -131,7 +136,7 @@
       </script>
       <script>
         function delTeam() {
-          window.location.href="/pokedex/team/" + "{{ nextPokemonId }}" +"/del"
+          window.location.href="/pokedex/team/" + "{{ PokemonId }}" +"/del"
         }
       </script>
       <script>
