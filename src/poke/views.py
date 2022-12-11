@@ -2,15 +2,13 @@ import requests as req
 from django.shortcuts import render
 from django.http import HttpResponse
 import random
+from .models import Team
 
 # Create your views here.
-
-team = []
 
 def home(requests):
     liste_images = []
     rserch= req.get("https://pokeapi.co/api/v2/pokemon/")
-    
     status=rserch.status_code
     if(status!=200):
         context = {'name': status}
@@ -30,7 +28,11 @@ def team(requests):
     return render(requests, 'pokeapp/team.html')
 
 def teamadd(requests,number):
-
+    if(Team.objects.count()<5):
+        Team.objects.create(id=number)
+        
+    #teampokemon = Team.objects.all()[1]
+    #idpok = teampokemon.id
     context = {'PokemonId': number }        
     return render(requests,'pokeapp/addteam.html',context)
 
@@ -85,5 +87,14 @@ def pokemon(requests, number):
     color = result['color']['name']
     habitat = result['habitat']['name']
 
-    context = {'PokemonId': number, 'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId , 'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }        
+    if(Team.objects.count()<5):
+        addteam = True
+    else:
+        addteam = False
+    if(Team.objects.filter(id = number).exists):
+        inteam = True
+    else:
+        inteam = False
+
+    context = {'inteam' : inteam ,'addteam' : addteam ,'PokemonId': number, 'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId , 'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }        
     return render(requests,'pokeapp/pokemon.html',context)

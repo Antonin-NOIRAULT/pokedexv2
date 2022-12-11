@@ -106,7 +106,13 @@
           <div id="barbutton3"></div>
           <div id="barbutton4"></div>
           <div id="yellowBox1">
+            {% if addteam is not False and inteam is not True %}
             <button id="teamButton" type="button" onclick="addTeam();">Add Team</button>
+            {% elif addteam is not True %}
+            <button id="teamButton" type="button" >Team full !</button>
+            {% elif inteam is not False %}
+            <button id="teamButton" type="button" >In Team !</button>
+            {% endif %}
           </div>
           <div id="yellowBox2">
             <!--<button id="teamButton" type="button" onclick="delTeam();">Del Team</button>!-->
