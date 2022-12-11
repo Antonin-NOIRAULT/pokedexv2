@@ -16,7 +16,20 @@ py -m venv .env
 py -m pip install --upgrade pip
 
 # Retourner au répertoire du projet 
-cd {repertoire}
+cd {repertoire/pokedexv2}
 
 # install des lib du requirements
 pip install -r requirements.txt
+
+# aller dans le repertoire de code 
+cd /src
+
+# Exécuter les commandes suivantes:
+py manage.py  makemigrations
+py manage.py  migrate
+
+# lancer l'application avec 
+py manage.py  runserver
+
+# ouvrir la page dans la navigateur 
+http://127.0.0.1:8000/pokedex/
