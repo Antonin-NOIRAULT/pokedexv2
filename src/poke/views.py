@@ -24,12 +24,42 @@ def home(requests):
     context = {'random' : random.randint(1, 151), 'liste_images' : liste_images[1:-1], 'first' : liste_images[0]}
     return render(requests, 'pokeapp/home.html', context)
 
-def team(requests):
-    return render(requests, 'pokeapp/team.html')
+def team(requests,number):
+    r = req.get("https://pokeapi.co/api/v2/pokemon/"+str(number))
+    result = r.json()
+    
+    nextPokemonId=result['id'] + 1
+    beforePokemonId=result['id'] - 1
+    type = result['types'][0]['type']['name']
+    weight = result['weight']
+    image = result['sprites']['other']['home']['front_default']
+    name = result['name']   
+
+    rinfo = req.get("https://pokeapi.co/api/v2/pokemon-species/"+str(number))
+    result = rinfo.json()
+    color = result['color']['name']
+    habitat = result['habitat']['name']
+
+    if(Team.objects.count()<5):
+        addteam = True
+    else:
+        addteam = False
+    if(Team.objects.filter(id = number).exists()):
+        inteam = True
+    else:
+        inteam = False
+
+    context = {'inteam' : inteam ,'addteam' : addteam ,'PokemonId': number, 'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId , 'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image } 
+    return render(requests, 'pokeapp/team.html',context)
 
 def teamadd(requests,number):
     Team.objects.create(id=number)
     context = {'PokemonId': number }        
+    return render(requests,'pokeapp/adddelteam.html',context)
+
+def delallteam(requests):
+    Team.objects.all().delete()
+    context = {'PokemonId': 1 }        
     return render(requests,'pokeapp/adddelteam.html',context)
 
 def teamdel(requests,number):
@@ -68,7 +98,16 @@ def search(requests, searchText):
         nextPokemonId =number+1
         beforePokemonId =number-1
 
-        context = {'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId ,'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }  
+        if(Team.objects.count()<5):
+            addteam = True
+        else:
+            addteam = False
+        if(Team.objects.filter(id = number).exists()):
+            inteam = True
+        else:
+            inteam = False
+
+        context = {'inteam' : inteam ,'addteam' : addteam ,'PokemonId': number,'nextPokemonId': nextPokemonId , 'beforePokemonId': beforePokemonId ,'name': name, 'color' : color, 'habitat' : habitat , 'weight' : weight , 'type' : type , 'image' : image }  
         return render(requests,'pokeapp/search.html',context)
 
 
